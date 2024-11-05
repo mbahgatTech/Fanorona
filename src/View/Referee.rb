@@ -1,34 +1,29 @@
-class GameSystem
+class Referee
   def initialize
     @board = Board.new
-    @player1 = Player.new
-    @player2 = Player.new
-    @ref = Referee.new
-    @turn_operator = TurnOperator.new
-    # @ui = UI.new - This does an infinite loop cuz nested initilizations
   end
 
-  def start_game(colour1, colour2)
+  def is_move_valid(from_row, from_col, to_row, to_col)
     FanoronaLogger.log_error('Not Implemented')
   end
 
-  def end_game
+  def check_multiple_captures(player)
     FanoronaLogger.log_error('Not Implemented')
   end
 
-  def handle_move(from_row, from_col, to_row, to_col)
+  def check_game_over
     FanoronaLogger.log_error('Not Implemented')
   end
 
-  def forfeit
+  def end_turn_validate
     FanoronaLogger.log_error('Not Implemented')
   end
 
-  def end_turn
+  def revert_move_validate
     FanoronaLogger.log_error('Not Implemented')
   end
 
-  def revert_move
+  def check_move_type(from_row, from_col, to_row, to_col)
     FanoronaLogger.log_error('Not Implemented')
   end
 end
