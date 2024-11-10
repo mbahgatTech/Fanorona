@@ -27,7 +27,10 @@ class GameSystem
 
     multiple_captures = @ref.check_multiple_captures(player)
 
-    return :NO_CAPTURES unless multiple_captures
+    unless multiple_captures
+      end_turn
+      return :NO_CAPTURES
+    end
 
     :MORE_CAPTURES
   end
