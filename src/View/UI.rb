@@ -1,6 +1,7 @@
 class UI
   def initialize
-    @model = GameSystem.new
+    @board = Board.new
+    @model = GameSystem.new(@board, self)
     @board_updater = BoardUpdater.new
     @board = Board.new
   end
@@ -97,8 +98,20 @@ Here are the rules of Fanorona
   end
 
   def process_move(from_row, from_col, to_row, to_col)
-    FanoronaLogger.log_info("Parameters: from_row = #{from_row}, from_col = #{from_col}, to_row = #{to_row}, to_col = #{to_col}")
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info('')
+    status = @model.handle_move(from_row, from_col, to_row, to_col)
+
+    return false if status == :INVALID_MOVE
+
+    @board_updater.print_game_board(@board)
+
+    if status == :NO_CAPTURES
+      puts 'No More Captures'
+    elsif status == :MORE_CAPTURES
+      puts 'More Captures Available'
+    end
+
+    true
   end
 
   def revert_move

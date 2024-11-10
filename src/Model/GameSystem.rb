@@ -1,6 +1,7 @@
 class GameSystem
-  def initialize
-    @board = Board.new
+  def initialize(board, ui)
+    @board = board
+    @ui = ui
     @ref = Referee.new
   end
 
@@ -16,7 +17,22 @@ class GameSystem
   end
 
   def handle_move(from_row, from_col, to_row, to_col)
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info('')
+    is_valid = @ref.is_move_valid(from_row, from_col, to_row, to_col)
+
+    return :INVALID_MOVE unless is_valid
+
+    player = @turn_operator.whose_turn
+    player.make_move(from_row, from_col, to_row, to_col, @board)
+
+    multiple_captures = @ref.check_multiple_captures(player)
+
+    unless multiple_captures
+      end_turn
+      return :NO_CAPTURES
+    end
+
+    :MORE_CAPTURES
   end
 
   def forfeit

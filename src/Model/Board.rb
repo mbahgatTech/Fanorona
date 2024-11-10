@@ -6,6 +6,7 @@ class Board
 
   def display_board
     FanoronaLogger.log_error('Not Implemented')
+    [[]]
   end
 
   def get_last_board

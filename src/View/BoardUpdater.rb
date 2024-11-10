@@ -4,6 +4,10 @@ class BoardUpdater
   end
 
   def print_game_board(board)
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info('')
+
+    board.display_board.each do |row|
+      puts row.join(' ')
+    end
   end
 end
