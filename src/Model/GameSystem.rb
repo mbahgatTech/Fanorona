@@ -1,15 +1,14 @@
 class GameSystem
   def initialize
     @board = Board.new
-    @player1 = Player.new
-    @player2 = Player.new
     @ref = Referee.new
-    @turn_operator = TurnOperator.new
-    # @ui = UI.new - This does an infinite loop cuz nested initilizations
   end
 
   def start_game(colour1, colour2)
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    @player1 = Player.new(colour1, true)
+    @player2 = Player.new(colour2, false)
+    @turn_operator = TurnOperator.new(@player1, @player2)
   end
 
   def end_game
@@ -30,5 +29,10 @@ class GameSystem
 
   def revert_move
     FanoronaLogger.log_error('Not Implemented')
+  end
+
+  def whose_turn
+    FanoronaLogger.log_info
+    @turn_operator.whose_turn
   end
 end
