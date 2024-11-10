@@ -17,8 +17,11 @@ class Referee
     FanoronaLogger.log_error('Not Implemented')
   end
 
-  def end_turn_validate
-    FanoronaLogger.log_error('Not Implemented')
+  def end_turn_validate(player)
+    FanoronaLogger.log_info
+    return true if player.check_moves_made.positive?
+
+    false
   end
 
   def revert_move_validate

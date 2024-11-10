@@ -3,7 +3,7 @@ class Player
     @colour = colour
     @turn = turn
     @pieces_captured = nil
-    @moves_made_on_turn = nil
+    @moves_made_on_turn = 0
   end
 
   def check_colour
@@ -25,14 +25,17 @@ class Player
   end
 
   def end_turn
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    @moves_made_on_turn = 0
   end
 
   def flip_turn
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    @turn = !@turn
   end
 
   def check_moves_made
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    @moves_made_on_turn
   end
 end

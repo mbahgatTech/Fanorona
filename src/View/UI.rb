@@ -26,28 +26,23 @@ What would you like to do today?
     case menu_option
     when '1'
       player_1_colour = ''
-      loop do
-        puts 'Choose a colour for Player 1 (Enter W for white and B for Black)'
+      puts 'Choose a colour for Player 1 (Enter W for white and B for Black)'
+      puts
+      print '> '
+      selected_colour = gets.chomp
+      puts
+      print 'Player 1 has chosen '
+      case selected_colour.downcase
+      when 'b'
+        puts 'Black'
         puts
-        print '> '
-        selected_colour = gets.chomp
+        player_1_colour = :B
+      when 'w'
+        puts 'White'
         puts
-        print 'Player 1 has chosen '
-        case selected_colour.downcase
-        when 'b'
-          puts 'Black'
-          puts
-          player_1_colour = :B
-          break
-        when 'w'
-          puts 'White'
-          puts
-          player_1_colour = :W
-          break
-        else
-          puts 'Invalid'
-          puts
-        end
+        player_1_colour = :W
+      else
+        return
       end
 
       print 'Player 2 is '
@@ -123,7 +118,8 @@ Here are the rules of Fanorona
   end
 
   def end_turn
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    @model.end_turn
   end
 
   def pause_game
