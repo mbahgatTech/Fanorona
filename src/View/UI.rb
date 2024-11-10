@@ -18,7 +18,7 @@ What would you like to do today?
 
 ')
 
-    print('> ')
+    print '> '
     menu_option = gets.chomp
 
     puts
@@ -27,43 +27,43 @@ What would you like to do today?
     when '1'
       player_1_colour = ''
       loop do
-        puts('Choose a colour for Player 1 (Enter W for white and B for Black)
-      ')
-        print('> ')
+        puts 'Choose a colour for Player 1 (Enter W for white and B for Black)'
+        puts
+        print '> '
         selected_colour = gets.chomp
         puts
-        print('Player 1 has chosen ')
+        print 'Player 1 has chosen '
         case selected_colour.downcase
         when 'b'
-          puts('Black')
+          puts 'Black'
           puts
           player_1_colour = :B
           break
         when 'w'
-          puts('White')
+          puts 'White'
           puts
           player_1_colour = :W
           break
         else
-          puts('Invalid')
+          puts 'Invalid'
           puts
         end
       end
 
-      print('Player 2 is ')
+      print 'Player 2 is '
       case player_1_colour
       when :W
-        puts('Black')
+        puts 'Black'
         puts
         player_2_colour = :B
       when :B
-        puts('White')
+        puts 'White'
         puts
         player_2_colour = :W
       end
 
       @model.start_game(player_1_colour, player_2_colour)
-      puts('Here is the initial game board')
+      puts 'Here is the initial game board'
       puts
       print_board
       puts
@@ -71,7 +71,7 @@ What would you like to do today?
     when '2'
       print_rules
     when '3'
-      puts('Thanks for playing Fanorona! Have a great day!')
+      puts 'Thanks for playing Fanorona! Have a great day!'
     end
   end
 
@@ -135,7 +135,7 @@ Here are the rules of Fanorona
     player_turn = @model.whose_turn
     player_colour = player_turn.check_colour == :B ? 'Black' : 'White'
 
-    puts("It's the #{player_colour} Player's turn")
+    puts "It's the #{player_colour} Player's turn"
     puts
   end
 
