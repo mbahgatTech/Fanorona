@@ -25,7 +25,8 @@ class Player
   end
 
   def end_turn
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    @moves_made_on_turn = 0
   end
 
   def flip_turn

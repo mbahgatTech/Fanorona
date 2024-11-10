@@ -8,6 +8,9 @@ class TurnOperator
     @whose_turn = @whose_turn == player1 ? player2 : player1
     player1.flip_turn
     player2.flip_turn
+
+    player1.end_turn
+    player2.end_turn
   end
 
   attr_reader :whose_turn

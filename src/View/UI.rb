@@ -63,8 +63,6 @@ What would you like to do today?
       print_board
       puts
       print_current_turn
-      end_turn
-      print_current_turn
     when '2'
       print_rules
     when '3'
