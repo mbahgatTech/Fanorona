@@ -12,7 +12,7 @@ class Player
   end
 
   def make_move(from_row, from_col, to_row, to_col, board)
-    FanoronaLogger.log_info('')
+    FanoronaLogger.log_info
     board.move_piece(from_row, from_col, to_row, to_col)
   end
 
