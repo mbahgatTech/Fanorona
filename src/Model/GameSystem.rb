@@ -1,15 +1,15 @@
 class GameSystem
   def initialize(board, ui)
     @board = board
-    @player1 = Player.new
-    @player2 = Player.new
-    @ref = Referee.new
-    @turn_operator = TurnOperator.new(@player1, @player2)
     @ui = ui
+    @ref = Referee.new
   end
 
   def start_game(colour1, colour2)
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    @player1 = Player.new(colour1, true)
+    @player2 = Player.new(colour2, false)
+    @turn_operator = TurnOperator.new(@player1, @player2)
   end
 
   def end_game
@@ -17,7 +17,7 @@ class GameSystem
   end
 
   def handle_move(from_row, from_col, to_row, to_col)
-    FanoronaLogger.log_info('')
+    FanoronaLogger.log_info
     is_valid = @ref.is_move_valid(from_row, from_col, to_row, to_col)
 
     return :INVALID_MOVE unless is_valid
@@ -45,5 +45,10 @@ class GameSystem
 
   def revert_move
     FanoronaLogger.log_error('Not Implemented')
+  end
+
+  def whose_turn
+    FanoronaLogger.log_info
+    @turn_operator.whose_turn
   end
 end

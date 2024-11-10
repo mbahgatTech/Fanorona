@@ -1,17 +1,18 @@
 class Player
-  def initialize
-    colour = nil
-    turn = nil
-    pieces_captured = nil
-    moves_made_on_turn = nil
+  def initialize(colour, turn)
+    @colour = colour
+    @turn = turn
+    @pieces_captured = nil
+    @moves_made_on_turn = nil
   end
 
   def check_colour
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    @colour
   end
 
   def make_move(from_row, from_col, to_row, to_col, board)
-    FanoronaLogger.log_info('')
+    FanoronaLogger.log_info
     board.move_piece(from_row, from_col, to_row, to_col)
   end
 
