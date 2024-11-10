@@ -6,12 +6,13 @@ class Player
     moves_made_on_turn = nil
   end
 
-  def checkColour
+  def check_colour
     FanoronaLogger.log_error('Not Implemented')
   end
 
   def make_move(from_row, from_col, to_row, to_col, board)
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info('')
+    board.move_piece(from_row, from_col, to_row, to_col)
   end
 
   def capture_piece

@@ -1,4 +1,4 @@
 require_relative './load_dependencies'
 
 ui = UI.new
-ui.run_fanorona
+ui.process_move(1, 2, 3, 4)
