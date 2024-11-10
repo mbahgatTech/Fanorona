@@ -1,6 +1,6 @@
 class TurnOperator
-  def initialize
-    @whose_turn = nil
+  def initialize(player1, player2)
+    @whose_turn = player1
   end
 
   def switch_turns(player1, player2)

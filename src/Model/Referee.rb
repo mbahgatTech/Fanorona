@@ -5,10 +5,12 @@ class Referee
 
   def is_move_valid(from_row, from_col, to_row, to_col)
     FanoronaLogger.log_error('Not Implemented')
+    true
   end
 
   def check_multiple_captures(player)
     FanoronaLogger.log_error('Not Implemented')
+    false
   end
 
   def check_game_over
