@@ -5,7 +5,9 @@ class TurnOperator
 
   def switch_turns(player1, player2)
     FanoronaLogger.log_info
-    @whos_turn = @whos_turn == player1 ? player2 : player1
+    @whose_turn = @whose_turn == player1 ? player2 : player1
+    player1.flip_turn
+    player2.flip_turn
   end
 
   attr_reader :whose_turn

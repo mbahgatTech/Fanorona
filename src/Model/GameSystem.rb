@@ -40,7 +40,8 @@ class GameSystem
   end
 
   def end_turn
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    @turn_operator.switch_turns(@player1, @player2) if @ref.end_turn_validate(whose_turn)
   end
 
   def revert_move
