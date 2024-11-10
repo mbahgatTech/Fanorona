@@ -3,7 +3,7 @@ class GameSystem
     @board = board
     @player1 = Player.new
     @player2 = Player.new
-    @ref = Referee.new
+    @ref = Referee.new(@board)
     @turn_operator = TurnOperator.new(@player1, @player2)
     @ui = ui
   end
@@ -21,6 +21,9 @@ class GameSystem
     is_valid = @ref.is_move_valid(from_row, from_col, to_row, to_col)
 
     return :INVALID_MOVE unless is_valid
+
+    @ref.check_move_type(from_row, from_col, to_row, to_col)
+    @ui.pick_capture_type
 
     player = @turn_operator.whose_turn
     player.make_move(from_row, from_col, to_row, to_col, @board)

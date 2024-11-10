@@ -1,6 +1,6 @@
 class Referee
-  def initialize
-    @board = Board.new
+  def initialize(board)
+    @board = board
   end
 
   def is_move_valid(from_row, from_col, to_row, to_col)
@@ -26,6 +26,6 @@ class Referee
   end
 
   def check_move_type(from_row, from_col, to_row, to_col)
-    FanoronaLogger.log_error('Not Implemented')
+    @board.check_move_type(from_row, from_col, to_row, to_col)
   end
 end
