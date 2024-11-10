@@ -5,7 +5,7 @@ class UI
   end
 
   def run_fanorona
-    FanoronaLogger.log_error('Not Implemented')
+    @model.start_game
   end
 
   def print_board
