@@ -13,23 +13,17 @@ class Referee
     false
   end
 
-  def check_game_over(turn)
+  def check_game_over
     FanoronaLogger.log_info
 
     checkWhiteMoves = 0
     checkBlackMoves = 0
 
-    if @board.how_many_colour(:WHITE) == 0
-      return :BLACK
-    elsif @board.how_many_colour(:BLACK) == 0
-      return :WHITE
+    if @board.how_many_colour(:W) == 0
+      return :B
+    elsif @board.how_many_colour(:B) == 0
+      return :W
     end
-
-    #for i in 0..8
-    #  for j in 0..4
-    #    if 
-    #  end
-    #end
 
     return nil
   end
