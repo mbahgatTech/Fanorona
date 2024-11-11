@@ -52,19 +52,19 @@ class Board
     if odd_row
       if (col % 2) == 0
         diagonals = []
-        diagonals += [row - 1, col - 1, @board[row - 1][col - 1]] if (row > 0 && col > 0)
-        diagonals += [row + 1, col + 1, @board[row + 1][col + 1]] if (row < (@board.length - 1) && col < (@board[0].length - 1))
-        diagonals += [row - 1, col + 1, @board[row - 1][col + 1]] if (row > 0 && col < (@board[0].length - 1))
-        diagonals += [row - 1, col - 1, @board[row + 1][col - 1]] if (row < (@board.length - 1) && col > 0)
+        diagonals += [[row - 1, col - 1, @board[row - 1][col - 1]]] if (row > 0 && col > 0)
+        diagonals += [[row + 1, col + 1, @board[row + 1][col + 1]]] if (row < (@board.length - 1) && col < (@board[0].length - 1))
+        diagonals += [[row - 1, col + 1, @board[row - 1][col + 1]]] if (row > 0 && col < (@board[0].length - 1))
+        diagonals += [[row - 1, col - 1, @board[row + 1][col - 1]]] if (row < (@board.length - 1) && col > 0)
 
         return diagonals
-      elsif
+      else
         return nil
       end
-    elsif
+    else
       if (col % 2) == 0
         return nil
-      elsif
+      else
         diagonals = []
         diagonals += [row - 1, col - 1, @board[row - 1][col - 1]] if (row > 0 && col > 0)
         diagonals += [row + 1, col + 1, @board[row + 1][col + 1]] if (row < (@board.length - 1) && col < (@board[0].length - 1))
@@ -77,13 +77,11 @@ class Board
   end
 
   def check_horizontals(row, col)
-    FanoronaLogger.log_info
-
-
+    FanoronaLogger.log_error('Not Implemented')
   end
 
   def check_verticals(row, col)
-    FanoronaLogger.log_info
+    FanoronaLogger.log_error('Not Implemented')
   end
 
   def check_empty_space(row, col)
