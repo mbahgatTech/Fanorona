@@ -15,6 +15,7 @@ class Board
 
   def move_piece(from_row, from_col, to_row, to_col, move_type)
     FanoronaLogger.log_info
+    @last_board = @board.map(&:clone)
     colour = @board[from_row - 1][from_col - 1]
     opponent_colour = colour == :W ? :B : :W
 
@@ -85,13 +86,19 @@ class Board
   def setup_game_board
     FanoronaLogger.log_info
 
-    @board = [%i[B B B B B B B B B],
-              %i[B B B B B B B B B],
-              %i[B W B W E B W B W],
-              %i[W W W W W W W W W],
-              %i[W W W W W W W W W]]
+    # @board = [%i[B B B B B B B B B],
+    #           %i[B B B B B B B B B],
+    #           %i[B W B W E B W B W],
+    #           %i[W W W W W W W W W],
+    #           %i[W W W W W W W W W]]
 
-    @last_board = @board
+    @board = [%i[E E E B E E E E E],
+              %i[E E W E B W E E E],
+              %i[E E E E E E E E E],
+              %i[E E E E E E E E E],
+              %i[E E E E E E E E E]]
+
+    @last_board = @board.map(&:clone)
   end
 
   def how_many_colour(colour)
@@ -165,7 +172,7 @@ class Board
     col -= 1
 
     verticals = []
-    verticals += [[row, col - 1, @board[row][col - 1]]] if col > 0
+    verticals += [[row, col - 1, @board[row][col - 1]]] if col.positive?
     verticals += [[row, col + 1, @board[row][col + 1]]] if col < (@board[0].length - 1)
 
     verticals
@@ -185,7 +192,7 @@ class Board
 
   def revert_move
     FanoronaLogger.log_info
-    @board = @last_board
+    @board = @last_board.map(&:clone)
   end
 
   def check_move_type(from_row, from_col, to_row, to_col, player)

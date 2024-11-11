@@ -16,8 +16,9 @@ class GameSystem
   def end_game(winner)
     FanoronaLogger.log_info
     colour = winner == :W ? 'White' : 'Black'
-
+    puts
     puts "#{colour} Player is the Winner!!"
+    puts
     @ui.run_fanorona
   end
 
@@ -32,20 +33,20 @@ class GameSystem
     available_captures = @ref.check_move_type(from_row, from_col, to_row, to_col, player)
     capture_type = @ui.pick_capture_type(available_captures)
 
+    pre_num_pieces = @board.how_many_colour(:W) + @board.how_many_colour(:B)
     player.make_move(from_row, from_col, to_row, to_col, capture_type, @board)
-    multiple_captures = @ref.check_multiple_captures(player)
+    post_num_pieces = @board.how_many_colour(:W) + @board.how_many_colour(:B)
+    multiple_captures = !@ref.check_move_type(to_row, to_col, to_row, to_col,
+                                              player).empty? && post_num_pieces < pre_num_pieces
 
-    unless multiple_captures
-      end_turn
-      return :NO_CAPTURES
-    end
+    return :NO_CAPTURES unless multiple_captures
 
     :MORE_CAPTURES
   end
 
   def forfeit
     FanoronaLogger.log_info
-    end_game((@turn_operator.whose_turn).check_colour)
+    end_game(@turn_operator.whose_turn.check_colour)
   end
 
   def end_turn
@@ -54,14 +55,15 @@ class GameSystem
 
     winner = @ref.check_game_over
 
-    if winner != nil
-      end_game(winner)
-    end
+    return if winner.nil?
+
+    end_game(winner)
   end
 
-  def revert_move(player)
+  def revert_move
     FanoronaLogger.log_info
-    return unless @ref.revert_move_validate
+    player = @turn_operator.whose_turn
+    return unless @ref.revert_move_validate(player)
 
     player.revert_move(@board)
     @board.revert_move

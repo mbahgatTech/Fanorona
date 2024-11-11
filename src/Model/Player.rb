@@ -13,8 +13,13 @@ class Player
 
   def make_move(from_row, from_col, to_row, to_col, move_type, board)
     FanoronaLogger.log_info
+    opp_colour = @colour == :W ? :B : :W
+    prev_opponent = board.how_many_colour(opp_colour)
     board.move_piece(from_row, from_col, to_row, to_col, move_type)
     @moves_made_on_turn += 1
+    after_opponent = board.how_many_colour(opp_colour)
+
+    @pieces_captured += prev_opponent - after_opponent
   end
 
   def capture_piece
