@@ -20,11 +20,11 @@ class Board
   def setup_game_board
     FanoronaLogger.log_info
 
-    @board = [[:BLACK,:BLACK,:BLACK,:BLACK,:BLACK,:BLACK,:BLACK,:BLACK,:BLACK],
-              [:BLACK,:BLACK,:BLACK,:BLACK,:BLACK,:BLACK,:BLACK,:BLACK,:BLACK],
-              [:BLACK,:WHITE,:BLACK,:WHITE,:EMPTY,:BLACK,:WHITE,:BLACK,:WHITE],
-              [:WHITE,:WHITE,:WHITE,:WHITE,:WHITE,:WHITE,:WHITE,:WHITE,:WHITE],
-              [:WHITE,:WHITE,:WHITE,:WHITE,:WHITE,:WHITE,:WHITE,:WHITE,:WHITE]]
+    @board = [[:B,:B,:B,:B,:B,:B,:B,:B,:B],
+              [:B,:B,:B,:B,:B,:B,:B,:B,:B],
+              [:B,:W,:B,:W,:E,:B,:W,:B,:W],
+              [:W,:W,:W,:W,:W,:W,:W,:W,:W],
+              [:W,:W,:W,:W,:W,:W,:W,:W,:W]]
   end
 
   def how_many_colour(colour)
@@ -59,7 +59,7 @@ class Board
     rowArray = @board.at(row)
     space = rowArray.at(col)
 
-    space == :EMPTY
+    space == :E
   end
 
   def revert_move
