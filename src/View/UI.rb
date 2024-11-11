@@ -2,8 +2,7 @@ class UI
   def initialize
     @board = Board.new
     @model = GameSystem.new(@board, self)
-    @board_updater = BoardUpdater.new
-    @board = Board.new
+    @board_updater = BoardUpdater.new(@board)
   end
 
   def run_fanorona
@@ -159,6 +158,6 @@ Here are the rules of Fanorona
       selection = gets.chomp.to_i - 1
     end
 
-    available_captures[selection - 1]
+    available_captures[selection]
   end
 end

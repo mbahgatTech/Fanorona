@@ -14,7 +14,11 @@ class Board
   end
 
   def move_piece(from_row, from_col, to_row, to_col, move_type)
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+
+    @board[to_row - 1][to_col - 1] = @board[from_row - 1][from_col - 1]
+    @board[from_row - 1][from_col - 1] = :E
+    @board[move_type[0] - 1][move_type[1] - 1] = :E
   end
 
   def setup_game_board
@@ -39,6 +43,8 @@ class Board
         count += 1 if space == colour
       end
     end
+
+    count
   end
 
   def check_diagonals(row, col)
@@ -97,6 +103,6 @@ class Board
     moves += check_diagonals(to_row, to_col)
 
     opponent_colour = player.check_colour == :W ? :B : :W
-    moves.select { |move| move[2] == opponent_colour }.map { |move| [move[0], move[1]] }
+    moves.select { |move| move[2] == opponent_colour }.map { |move| [move[0] + 1, move[1] + 1] }
   end
 end
