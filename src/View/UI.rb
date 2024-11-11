@@ -136,7 +136,25 @@ Here are the rules of Fanorona
     puts
   end
 
-  def pick_capture_type
-    FanoronaLogger.log_error('Not Implemented')
+  def pick_capture_type(available_captures)
+    FanoronaLogger.log_info
+    return nil if available_captures.empty?
+
+    selection = -1
+    while selection.negative? || selection >= available_captures.length
+      puts "> There are #{available_captures.length} available pieces to capture, which one would you like to capture"
+      puts
+
+      available_captures.each_with_index do |coords, index|
+        puts "To capture the piece at #{coords[0]},#{coords[1]} enter #{index + 1}"
+      end
+
+      puts
+      print '>'
+
+      selection = gets.chomp.to_i - 1
+    end
+
+    available_captures[selection - 1]
   end
 end

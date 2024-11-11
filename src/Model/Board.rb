@@ -20,11 +20,11 @@ class Board
   def setup_game_board
     FanoronaLogger.log_info
 
-    @board = [[:B,:B,:B,:B,:B,:B,:B,:B,:B],
-              [:B,:B,:B,:B,:B,:B,:B,:B,:B],
-              [:B,:W,:B,:W,:E,:B,:W,:B,:W],
-              [:W,:W,:W,:W,:W,:W,:W,:W,:W],
-              [:W,:W,:W,:W,:W,:W,:W,:W,:W]]
+    @board = [%i[B B B B B B B B B],
+              %i[B B B B B B B B B],
+              %i[B W B W E B W B W],
+              %i[W W W W W W W W W],
+              %i[W W W W W W W W W]]
   end
 
   def how_many_colour(colour)
@@ -34,23 +34,38 @@ class Board
 
     @board.each do |row|
       row.each do |space|
-        if space == colour
-          count += 1
-        end
+        count += 1 if space == colour
       end
     end
   end
 
   def check_diagonals(row, col)
     FanoronaLogger.log_error('Not Implemented')
+    []
   end
 
   def check_horizontals(row, col)
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    row -= 1
+    col -= 1
+
+    horizontals = []
+    horizontals += [[row - 1, col, @board[row - 1][col]]] if row > 0
+    horizontals += [[row + 1, col, @board[row + 1][col]]] if row < (@board.length - 1)
+
+    horizontals
   end
 
   def check_verticals(row, col)
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    row -= 1
+    col -= 1
+
+    verticals = []
+    verticals += [[row, col - 1, @board[row][col - 1]]] if col > 0
+    verticals += [[row, col + 1, @board[row][col + 1]]] if col < (@board[0].length - 1)
+
+    verticals
   end
 
   def check_empty_space(row, col)
@@ -67,6 +82,18 @@ class Board
   end
 
   def check_move_type(from_row, from_col, to_row, to_col, player)
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    moves = []
+
+    moves += check_horizontals(from_row, from_col)
+    moves += check_verticals(from_row, from_col)
+    moves += check_diagonals(from_row, from_col)
+
+    moves += check_horizontals(to_row, to_col)
+    moves += check_verticals(to_row, to_col)
+    moves += check_diagonals(to_row, to_col)
+
+    opponent_colour = player.check_colour == :W ? :B : :W
+    moves.select { |move| move[2] == opponent_colour }.map { |move| [move[0], move[1]] }
   end
 end
