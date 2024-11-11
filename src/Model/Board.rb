@@ -39,6 +39,8 @@ class Board
         count += 1 if space == colour
       end
     end
+
+    count
   end
 
   def check_diagonals(row, col)
@@ -66,10 +68,10 @@ class Board
         return nil
       else
         diagonals = []
-        diagonals += [row - 1, col - 1, @board[row - 1][col - 1]] if (row > 0 && col > 0)
-        diagonals += [row + 1, col + 1, @board[row + 1][col + 1]] if (row < (@board.length - 1) && col < (@board[0].length - 1))
-        diagonals += [row - 1, col + 1, @board[row - 1][col + 1]] if (row > 0 && col < (@board[0].length - 1))
-        diagonals += [row - 1, col - 1, @board[row + 1][col - 1]] if (row < (@board.length - 1) && col > 0)
+        diagonals += [[row - 1, col - 1, @board[row - 1][col - 1]]] if (row > 0 && col > 0)
+        diagonals += [[row + 1, col + 1, @board[row + 1][col + 1]]] if (row < (@board.length - 1) && col < (@board[0].length - 1))
+        diagonals += [[row - 1, col + 1, @board[row - 1][col + 1]]] if (row > 0 && col < (@board[0].length - 1))
+        diagonals += [[row - 1, col - 1, @board[row + 1][col - 1]]] if (row < (@board.length - 1) && col > 0)
       
         return diagonals
       end
