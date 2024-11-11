@@ -59,13 +59,11 @@ What would you like to do today?
       @model.start_game(player_1_colour, player_2_colour)
       puts 'Here is the initial game board'
       puts
-      print_board
-      puts
-      print_current_turn
     when '2'
       print_rules
     when '3'
       puts 'Thanks for playing Fanorona! Have a great day!'
+      exit
     end
   end
 
@@ -95,15 +93,9 @@ Here are the rules of Fanorona
     FanoronaLogger.log_info('')
     status = @model.handle_move(from_row, from_col, to_row, to_col)
 
+    FanoronaLogger.log_info(status)
+
     return false if status == :INVALID_MOVE
-
-    @board_updater.print_game_board(@board)
-
-    if status == :NO_CAPTURES
-      puts 'No More Captures'
-    elsif status == :MORE_CAPTURES
-      puts 'More Captures Available'
-    end
 
     true
   end
@@ -117,6 +109,8 @@ Here are the rules of Fanorona
     case opp_confirm_choice.downcase
     when 'y'
       @model.revert_move
+    when 'n'
+      end_turn
     end
   end
 
@@ -150,10 +144,11 @@ Here are the rules of Fanorona
 
       available_captures.each_with_index do |coords, index|
         puts "To capture the piece at #{coords[0]},#{coords[1]} enter #{index + 1}"
+        puts
       end
 
       puts
-      print '>'
+      print '> '
 
       selection = gets.chomp.to_i - 1
     end

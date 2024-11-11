@@ -1,6 +1,6 @@
 class TurnOperator
   def initialize(player1, player2)
-    @whose_turn = player1
+    @whose_turn = player1.check_colour == :W ? player1 : player2
   end
 
   def switch_turns(player1, player2)

@@ -5,7 +5,7 @@ class FanoronaLogger
   include Singleton
 
   def initialize
-    @logger = Logger.new(STDOUT)
+    @logger = Logger.new('./logs/.log')
     @logger.formatter = proc do |severity, datetime, progname, msg|
       "#{datetime.strftime('%Y-%m-%d %H:%M:%S')} [#{severity}] #{progname}: #{msg}\n"
     end
