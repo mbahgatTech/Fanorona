@@ -50,15 +50,19 @@ class GameSystem
     FanoronaLogger.log_info
     @turn_operator.switch_turns(@player1, @player2) if @ref.end_turn_validate(whose_turn)
 
-    winner = @ref.check_game_over()
+    winner = @ref.check_game_over
 
     if winner != nil
       self.end_game(winner)
     end
   end
 
-  def revert_move
-    FanoronaLogger.log_error('Not Implemented')
+  def revert_move(player)
+    FanoronaLogger.log_info
+    return unless @ref.revert_move_validate
+
+    player.revert_move(@board)
+    @board.revert_move
   end
 
   def whose_turn

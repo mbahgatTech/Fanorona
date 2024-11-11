@@ -2,7 +2,7 @@ class Player
   def initialize(colour, turn)
     @colour = colour
     @turn = turn
-    @pieces_captured = nil
+    @pieces_captured = 0
     @moves_made_on_turn = 0
   end
 
@@ -14,14 +14,30 @@ class Player
   def make_move(from_row, from_col, to_row, to_col, move_type, board)
     FanoronaLogger.log_info
     board.move_piece(from_row, from_col, to_row, to_col, move_type)
+    @moves_made_on_turn += 1
   end
 
   def capture_piece
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    @pieces_captured += 1
   end
 
-  def revert_move
-    FanoronaLogger.log_error('Not Implemented')
+  def revert_move(board)
+    FanoronaLogger.log_info
+    last_board = board.get_last_board
+
+    prev_opp_count = 0
+    opp_colour = @colour == :W ? :B : :W
+    last_board.each do |row|
+      row.each do |space|
+        prev_opp_count += 1 if space == opp_colour
+      end
+    end
+
+    curr_opp_count = board.how_many_colour(opp_colour)
+
+    @pieces_captured -= prev_opp_count - curr_opp_count
+    @moves_made_on_turn -= 1
   end
 
   def end_turn
