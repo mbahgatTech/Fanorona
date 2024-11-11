@@ -10,6 +10,7 @@ class GameSystem
     @player1 = Player.new(colour1, true)
     @player2 = Player.new(colour2, false)
     @turn_operator = TurnOperator.new(@player1, @player2)
+    @board.setup_game_board
   end
 
   def end_game(winner)
@@ -28,9 +29,10 @@ class GameSystem
 
     player = @turn_operator.whose_turn
 
-    move_type = @ref.check_move_type(from_row, from_col, to_row, to_col, player)
-    player.make_move(from_row, from_col, to_row, to_col, move_type, @board)
+    available_captures = @ref.check_move_type(from_row, from_col, to_row, to_col, player)
+    capture_type = @ui.pick_capture_type(available_captures)
 
+    player.make_move(from_row, from_col, to_row, to_col, capture_type, @board)
     multiple_captures = @ref.check_multiple_captures(player)
 
     unless multiple_captures
