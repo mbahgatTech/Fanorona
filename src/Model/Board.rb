@@ -15,10 +15,69 @@ class Board
 
   def move_piece(from_row, from_col, to_row, to_col, move_type)
     FanoronaLogger.log_info
+    colour = @board[from_row - 1][from_col - 1]
+    opponent_colour = colour == :W ? :B : :W
 
-    @board[to_row - 1][to_col - 1] = @board[from_row - 1][from_col - 1]
+    @board[to_row - 1][to_col - 1] = colour
     @board[from_row - 1][from_col - 1] = :E
-    @board[move_type[0] - 1][move_type[1] - 1] = :E
+
+    if from_row != to_row && from_col != to_col
+      if from_row > to_row && from_col < to_col
+        row = move_type[0]
+        col = move_type[1] - 2
+
+        while (row -= 1) >= 0 && (col += 1) < @board[0].length && @board[row][col] == opponent_colour
+          @board[row][col] = :E
+        end
+      elsif from_row < to_row && from_col > to_col
+        row = move_type[0] - 2
+        col = move_type[1]
+
+        while (row += 1) < @board.length && (col -= 1) >= 0 && @board[row][col] == opponent_colour
+          @board[row][col] = :E
+        end
+      elsif from_row < to_row && from_col < to_col
+        row = move_type[0] - 2
+        col = move_type[1] - 2
+
+        while (row += 1) < @board.length && (col += 1) < @board[0].length && @board[row][col] == opponent_colour
+          @board[row][col] = :E
+        end
+      elsif from_row > to_row && from_col > to_col
+        row = move_type[0]
+        col = move_type[1]
+
+        while (row -= 1) >= 0 && (col -= 1) >= 0 && @board[row][col] == opponent_colour
+          @board[row][col] = :E
+        end
+      end
+    elsif from_row != to_row
+      row = move_type[0] - 2
+      col = move_type[1] - 1
+
+      while (row += 1) < @board.length && @board[row][col] == opponent_colour
+        @board[row][col] = :E
+      end
+
+      row = move_type[0] - 1
+
+      while (row -= 1) >= 0 && @board[row][col] == opponent_colour
+        @board[row][col] = :E
+      end
+    elsif from_col != to_col
+      row = move_type[0] - 1
+      col = move_type[1] - 2
+
+      while (col += 1) < @board[0].length && @board[row][col] == opponent_colour
+        @board[row][col] = :E
+      end
+
+      col = move_type[1] - 1
+
+      while (col -= 1) >= 0 && @board[row][col] == opponent_colour
+        @board[row][col] = :E
+      end
+    end
   end
 
   def setup_game_board
@@ -131,13 +190,16 @@ class Board
     FanoronaLogger.log_info
     moves = []
 
-    moves += check_horizontals(from_row, from_col)
-    moves += check_verticals(from_row, from_col)
-    moves += check_diagonals(from_row, from_col)
-
-    moves += check_horizontals(to_row, to_col)
-    moves += check_verticals(to_row, to_col)
-    moves += check_diagonals(to_row, to_col)
+    if from_row != to_row && from_col != to_col
+      moves += check_diagonals(from_row, from_col)
+      moves += check_diagonals(to_row, to_col)
+    elsif from_row != to_row
+      moves += check_horizontals(from_row, from_col)
+      moves += check_horizontals(to_row, to_col)
+    elsif from_col != to_col
+      moves += check_verticals(from_row, from_col)
+      moves += check_verticals(to_row, to_col)
+    end
 
     opponent_colour = player.check_colour == :W ? :B : :W
     moves.select { |move| move[2] == opponent_colour }.map { |move| [move[0] + 1, move[1] + 1] }
