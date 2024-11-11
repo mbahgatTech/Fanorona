@@ -21,6 +21,8 @@ class Board
     @board[to_row - 1][to_col - 1] = colour
     @board[from_row - 1][from_col - 1] = :E
 
+    return if move_type.nil? || move_type.empty?
+
     if from_row != to_row && from_col != to_col
       if from_row > to_row && from_col < to_col
         row = move_type[0]
@@ -191,8 +193,24 @@ class Board
     moves = []
 
     if from_row != to_row && from_col != to_col
-      moves += check_diagonals(from_row, from_col)
-      moves += check_diagonals(to_row, to_col)
+      from_row -= 1
+      from_col -= 1
+      to_row -= 1
+      to_col -= 1
+
+      if from_row > to_row && from_col < to_col
+        moves += [[to_row - 1, to_col + 1, @board[to_row - 1][to_col + 1]]]
+        moves += [[from_row + 1, from_col - 1, @board[from_row + 1][from_col - 1]]]
+      elsif from_row < to_row && from_col > to_col
+        moves += [[to_row + 1, to_col - 1, @board[to_row + 1][to_col - 1]]]
+        moves += [[from_row - 1, from_col + 1, @board[from_row - 1][from_col + 1]]]
+      elsif from_row < to_row && from_col < to_col
+        moves += [[to_row + 1, to_col + 1, @board[to_row + 1][to_col + 1]]]
+        moves += [[from_row - 1, from_col - 1, @board[from_row - 1][from_col - 1]]]
+      elsif from_row > to_row && from_col > to_col
+        moves += [[to_row - 1, to_col - 1, @board[to_row - 1][to_col - 1]]]
+        moves += [[from_row + 1, from_col + 1, @board[from_row + 1][from_col + 1]]]
+      end
     elsif from_row != to_row
       moves += check_horizontals(from_row, from_col)
       moves += check_horizontals(to_row, to_col)
