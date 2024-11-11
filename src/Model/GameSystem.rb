@@ -21,7 +21,7 @@ class GameSystem
   end
 
   def handle_move(from_row, from_col, to_row, to_col)
-    FanoronaLogger.log_info('')
+    FanoronaLogger.log_info
     is_valid = @ref.is_move_valid(from_row, from_col, to_row, to_col)
 
     return :INVALID_MOVE unless is_valid
