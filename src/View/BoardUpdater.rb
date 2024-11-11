@@ -10,8 +10,6 @@ class BoardUpdater
 
     @board.display_board.each_with_index do |row, index|
       print "#{index + 1} "
-      # puts row[0].inspect
-      # puts row
       puts row.map { |s| s == :E ? '.' : s }.join(' ')
     end
   end
