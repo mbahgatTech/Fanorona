@@ -13,8 +13,11 @@ class Referee
     false
   end
 
-  def check_game_over()
-    FanoronaLogger.log_error('Not Implemented')
+  def check_game_over(turn)
+    FanoronaLogger.log_info
+
+    checkWhiteMoves = 0
+    checkBlackMoves = 0
 
     if @board.how_many_colour(:WHITE) == 0
       return :BLACK
@@ -22,7 +25,12 @@ class Referee
       return :WHITE
     end
 
-    
+    #for i in 0..8
+    #  for j in 0..4
+    #    if 
+    #  end
+    #end
+
     return nil
   end
 
