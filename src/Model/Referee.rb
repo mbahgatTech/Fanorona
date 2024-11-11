@@ -33,7 +33,7 @@ class Referee
   end
 
   def check_multiple_captures(player)
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_error('Infeasable')
     false
   end
 
