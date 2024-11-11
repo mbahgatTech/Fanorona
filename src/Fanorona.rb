@@ -21,13 +21,16 @@ loop do
   to_row, to_col = input.split(',').map(&:strip).map(&:to_i)
   puts
 
-  valid = ui.process_move(from_row, from_col, to_row, to_col)
-  puts 'Invalid move! Try again' unless valid
-  next unless valid
+  status = ui.process_move(from_row, from_col, to_row, to_col)
+  puts 'Invalid move! Try again' if status == :INVALID_MOVE
+  ui.print_board
+  next if status == :INVALID_MOVE
 
+  puts
   puts '> Move performed!'
   puts
   puts 'Here is the updated board'
+  puts
   ui.print_board
   puts
   puts 'Undo move? (Y or N)'
@@ -40,5 +43,12 @@ loop do
     ui.print_board
     next
   end
+  if status == :MORE_CAPTURES
+    puts 'You can make another capture! Go again!' if status == :MORE_CAPTURES
+    puts
+    ui.print_board
+    next
+  end
+
   ui.end_turn
 end

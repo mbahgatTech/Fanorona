@@ -91,13 +91,7 @@ Here are the rules of Fanorona
 
   def process_move(from_row, from_col, to_row, to_col)
     FanoronaLogger.log_info('')
-    status = @model.handle_move(from_row, from_col, to_row, to_col)
-
-    FanoronaLogger.log_info(status)
-
-    return false if status == :INVALID_MOVE
-
-    true
+    @model.handle_move(from_row, from_col, to_row, to_col)
   end
 
   def revert_move

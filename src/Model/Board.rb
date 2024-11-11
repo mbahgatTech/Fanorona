@@ -92,8 +92,8 @@ class Board
     #           %i[W W W W W W W W W],
     #           %i[W W W W W W W W W]]
 
-    @board = [%i[E E E E E E E E E],
-              %i[E E W E E B E E E],
+    @board = [%i[E E E B E E E E E],
+              %i[E E W E B W E E E],
               %i[E E E E E E E E E],
               %i[E E E E E E E E E],
               %i[E E E E E E E E E]]
@@ -223,7 +223,6 @@ class Board
       moves += check_horizontals(to_row, to_col)
     elsif from_col != to_col
       moves += check_verticals(from_row, from_col)
-      puts(moves)
       moves += check_verticals(to_row, to_col)
     end
 

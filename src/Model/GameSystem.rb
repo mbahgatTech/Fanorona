@@ -33,8 +33,11 @@ class GameSystem
     available_captures = @ref.check_move_type(from_row, from_col, to_row, to_col, player)
     capture_type = @ui.pick_capture_type(available_captures)
 
+    pre_num_pieces = @board.how_many_colour(:W) + @board.how_many_colour(:B)
     player.make_move(from_row, from_col, to_row, to_col, capture_type, @board)
-    multiple_captures = @ref.check_multiple_captures(player)
+    post_num_pieces = @board.how_many_colour(:W) + @board.how_many_colour(:B)
+    multiple_captures = !@ref.check_move_type(to_row, to_col, to_row, to_col,
+                                              player).empty? && post_num_pieces < pre_num_pieces
 
     return :NO_CAPTURES unless multiple_captures
 
