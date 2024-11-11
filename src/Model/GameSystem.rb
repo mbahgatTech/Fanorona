@@ -53,7 +53,7 @@ class GameSystem
     winner = @ref.check_game_over
 
     if winner != nil
-      self.end_game(winner)
+      end_game(winner)
     end
   end
 
