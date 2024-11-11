@@ -55,8 +55,12 @@ class GameSystem
     @ref.check_game_over
   end
 
-  def revert_move
-    FanoronaLogger.log_error('Not Implemented')
+  def revert_move(player)
+    FanoronaLogger.log_info
+    return unless @ref.revert_move_validate
+
+    player.revert_move(@board)
+    @board.revert_move
   end
 
   def whose_turn

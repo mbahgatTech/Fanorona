@@ -110,7 +110,15 @@ Here are the rules of Fanorona
   end
 
   def revert_move
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    puts 'Opponent confirm undo (Y or N): '
+    puts
+    print('> ')
+    opp_confirm_choice = gets.chomp
+    case opp_confirm_choice.downcase
+    when 'y'
+      @model.revert_move
+    end
   end
 
   def forfeit
@@ -121,10 +129,6 @@ Here are the rules of Fanorona
   def end_turn
     FanoronaLogger.log_info
     @model.end_turn
-  end
-
-  def pause_game
-    FanoronaLogger.log_error('Not Implemented')
   end
 
   def print_current_turn

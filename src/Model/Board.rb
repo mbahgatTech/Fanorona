@@ -1,16 +1,16 @@
 class Board
   def initialize
-    @board = nil
-    @last_board = nil
+    setup_game_board
   end
 
   def display_board
-    FanoronaLogger.log_error('Not Implemented')
-    [[]]
+    FanoronaLogger.log_info
+    @board
   end
 
   def get_last_board
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    @last_board
   end
 
   def move_piece(from_row, from_col, to_row, to_col, move_type)
@@ -25,6 +25,8 @@ class Board
               %i[B W B W E B W B W],
               %i[W W W W W W W W W],
               %i[W W W W W W W W W]]
+
+    @last_board = @board
   end
 
   def how_many_colour(colour)
@@ -71,14 +73,15 @@ class Board
   def check_empty_space(row, col)
     FanoronaLogger.log_info
 
-    rowArray = @board.at(row)
-    space = rowArray.at(col)
+    row_array = @board.at(row)
+    space = row_array.at(col)
 
     space == :E
   end
 
   def revert_move
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    @board = @last_board
   end
 
   def check_move_type(from_row, from_col, to_row, to_col, player)
