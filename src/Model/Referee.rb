@@ -13,10 +13,10 @@ class Referee
 
     is_diagonal = from_col != to_col && from_row != to_row
 
-    return false if is_diagonal && check_diagonals(from_row, from_col).empty?
+    return false if is_diagonal && @board.check_diagonals(from_row, from_col).empty?
 
     # moving more than 1 slot
-    return false if (from_row - to_row).abs > 1 || (from_col - from_row).abs > 1
+    return false if (from_row - to_row).abs > 1 || (from_col - to_col).abs > 1
 
     board = @board.display_board
     moving_player = board[from_row][from_col]
