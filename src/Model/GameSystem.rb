@@ -14,7 +14,7 @@ class GameSystem
 
   def end_game(winner)
     FanoronaLogger.log_info
-    colour = winner.check_colour == :W ? 'White' : 'Black'
+    colour = winner == :W ? 'White' : 'Black'
 
     puts "#{colour} Player is the Winner!!"
     @ui.run_fanorona
@@ -43,14 +43,18 @@ class GameSystem
 
   def forfeit
     FanoronaLogger.log_info
-    end_game(@turn_operator.whose_turn)
+    end_game((@turn_operator.whose_turn).check_colour)
   end
 
   def end_turn
     FanoronaLogger.log_info
     @turn_operator.switch_turns(@player1, @player2) if @ref.end_turn_validate(whose_turn)
 
-    @ref.check_game_over
+    winner = @ref.check_game_over
+
+    if winner != nil
+      end_game(winner)
+    end
   end
 
   def revert_move(player)
