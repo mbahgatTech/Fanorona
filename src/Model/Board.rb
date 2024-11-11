@@ -77,13 +77,11 @@ class Board
   end
 
   def check_horizontals(row, col)
-    FanoronaLogger.log_info
-
-
+    FanoronaLogger.log_error('Not Implemented')
   end
 
   def check_verticals(row, col)
-    FanoronaLogger.log_info
+    FanoronaLogger.log_error('Not Implemented')
   end
 
   def check_empty_space(row, col)
