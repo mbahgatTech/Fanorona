@@ -1,16 +1,16 @@
 class Board
   def initialize
-    @board = nil
-    @last_board = nil
+    setup_game_board
   end
 
   def display_board
-    FanoronaLogger.log_error('Not Implemented')
-    [[]]
+    FanoronaLogger.log_info
+    @board
   end
 
   def get_last_board
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    @last_board
   end
 
   def move_piece(from_row, from_col, to_row, to_col, move_type)
@@ -20,11 +20,13 @@ class Board
   def setup_game_board
     FanoronaLogger.log_info
 
-    @board = [[:B,:B,:B,:B,:B,:B,:B,:B,:B],
-              [:B,:B,:B,:B,:B,:B,:B,:B,:B],
-              [:B,:W,:B,:W,:E,:B,:W,:B,:W],
-              [:W,:W,:W,:W,:W,:W,:W,:W,:W],
-              [:W,:W,:W,:W,:W,:W,:W,:W,:W]]
+    @board = [%i[B B B B B B B B B],
+              %i[B B B B B B B B B],
+              %i[B W B W E B W B W],
+              %i[W W W W W W W W W],
+              %i[W W W W W W W W W]]
+
+    @last_board = @board
   end
 
   def how_many_colour(colour)
@@ -34,9 +36,7 @@ class Board
 
     @board.each do |row|
       row.each do |space|
-        if space == colour
-          count += 1
-        end
+        count += 1 if space == colour
       end
     end
   end
@@ -77,11 +77,13 @@ class Board
   end
 
   def check_horizontals(row, col)
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+
+
   end
 
   def check_verticals(row, col)
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
   end
 
   def check_empty_space(row, col)
@@ -90,14 +92,15 @@ class Board
     row -= 1
     col -= 1
 
-    rowArray = @board.at(row)
-    space = rowArray.at(col)
+    row_array = @board.at(row)
+    space = row_array.at(col)
 
     space == :E
   end
 
   def revert_move
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    @board = @last_board
   end
 
   def check_move_type(from_row, from_col, to_row, to_col, player)
