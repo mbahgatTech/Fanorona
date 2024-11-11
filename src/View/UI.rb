@@ -158,6 +158,6 @@ Here are the rules of Fanorona
       selection = gets.chomp.to_i - 1
     end
 
-    available_captures[selection]
+    available_captures[selection] || []
   end
 end
