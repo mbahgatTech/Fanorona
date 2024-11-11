@@ -1423,3 +1423,5 @@
 2024-11-11 06:00:54 [INFO] : Board.how_many_colour: 
 2024-11-11 06:00:54 [INFO] : GameSystem.end_game: 
 2024-11-11 06:00:54 [INFO] : UI.run_fanorona: 
+2024-11-11 06:06:07 [INFO] : Board.setup_game_board: 
+2024-11-11 06:06:07 [INFO] : UI.run_fanorona: 
