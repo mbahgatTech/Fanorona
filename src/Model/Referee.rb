@@ -25,7 +25,7 @@ class Referee
     FanoronaLogger.log_error('Not Implemented')
   end
 
-  def check_move_type(from_row, from_col, to_row, to_col)
-    @board.check_move_type(from_row, from_col, to_row, to_col)
+  def check_move_type(from_row, from_col, to_row, to_col, player)
+    @board.check_move_type(from_row, from_col, to_row, to_col, player)
   end
 end

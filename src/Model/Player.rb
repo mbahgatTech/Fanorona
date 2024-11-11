@@ -10,9 +10,9 @@ class Player
     FanoronaLogger.log_error('Not Implemented')
   end
 
-  def make_move(from_row, from_col, to_row, to_col, board)
+  def make_move(from_row, from_col, to_row, to_col, move_type, board)
     FanoronaLogger.log_info('')
-    board.move_piece(from_row, from_col, to_row, to_col)
+    board.move_piece(from_row, from_col, to_row, to_col, move_type)
   end
 
   def capture_piece

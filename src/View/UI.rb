@@ -39,7 +39,8 @@ class UI
   end
 
   def forfeit
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    @model.forfeit
   end
 
   def end_turn

@@ -12,8 +12,8 @@ class GameSystem
     FanoronaLogger.log_error('Not Implemented')
   end
 
-  def end_game
-    FanoronaLogger.log_error('Not Implemented')
+  def end_game(winner)
+    FanoronaLogger.log_info
   end
 
   def handle_move(from_row, from_col, to_row, to_col)
@@ -22,11 +22,10 @@ class GameSystem
 
     return :INVALID_MOVE unless is_valid
 
-    @ref.check_move_type(from_row, from_col, to_row, to_col)
-    @ui.pick_capture_type
-
     player = @turn_operator.whose_turn
-    player.make_move(from_row, from_col, to_row, to_col, @board)
+
+    move_type = @ref.check_move_type(from_row, from_col, to_row, to_col, player)
+    player.make_move(from_row, from_col, to_row, to_col, move_type, @board)
 
     multiple_captures = @ref.check_multiple_captures(player)
 
@@ -39,7 +38,8 @@ class GameSystem
   end
 
   def forfeit
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+    end_game(@turn_operator.whose_turn)
   end
 
   def end_turn
