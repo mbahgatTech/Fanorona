@@ -54,10 +54,10 @@ class Board
     if odd_row
       if (col % 2) == 0
         diagonals = []
-        diagonals += [[row - 1, col - 1, @board[row - 1][col - 1]]] if (row > 0 && col > 0)
-        diagonals += [[row + 1, col + 1, @board[row + 1][col + 1]]] if (row < (@board.length - 1) && col < (@board[0].length - 1))
-        diagonals += [[row - 1, col + 1, @board[row - 1][col + 1]]] if (row > 0 && col < (@board[0].length - 1))
-        diagonals += [[row - 1, col - 1, @board[row + 1][col - 1]]] if (row < (@board.length - 1) && col > 0)
+        diagonals += [[row, col, @board[row - 1][col - 1]]] if (row > 0 && col > 0)
+        diagonals += [[row + 2, col + 2, @board[row + 1][col + 1]]] if (row < (@board.length - 1) && col < (@board[0].length - 1))
+        diagonals += [[row, col + 2, @board[row - 1][col + 1]]] if (row > 0 && col < (@board[0].length - 1))
+        diagonals += [[row + 2, col, @board[row + 1][col - 1]]] if (row < (@board.length - 1) && col > 0)
 
         return diagonals
       else
@@ -68,10 +68,10 @@ class Board
         return nil
       else
         diagonals = []
-        diagonals += [[row - 1, col - 1, @board[row - 1][col - 1]]] if (row > 0 && col > 0)
-        diagonals += [[row + 1, col + 1, @board[row + 1][col + 1]]] if (row < (@board.length - 1) && col < (@board[0].length - 1))
-        diagonals += [[row - 1, col + 1, @board[row - 1][col + 1]]] if (row > 0 && col < (@board[0].length - 1))
-        diagonals += [[row - 1, col - 1, @board[row + 1][col - 1]]] if (row < (@board.length - 1) && col > 0)
+        diagonals += [[row, col, @board[row - 1][col - 1]]] if (row > 0 && col > 0)
+        diagonals += [[row + 2, col + 2, @board[row + 1][col + 1]]] if (row < (@board.length - 1) && col < (@board[0].length - 1))
+        diagonals += [[row, col + 2, @board[row - 1][col + 1]]] if (row > 0 && col < (@board[0].length - 1))
+        diagonals += [[row +2, col, @board[row + 1][col - 1]]] if (row < (@board.length - 1) && col > 0)
       
         return diagonals
       end
