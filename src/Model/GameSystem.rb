@@ -15,8 +15,9 @@ class GameSystem
   def end_game(winner)
     FanoronaLogger.log_info
     colour = winner.check_colour
+    player_num = colour == :W ? 1 : 2
 
-    puts "Player #{colour} is the Winner!!"
+    puts "Player #{player_num} is the Winner!!"
     @ui.run_fanorona
   end
 
