@@ -13,7 +13,7 @@ class Board
     FanoronaLogger.log_error('Not Implemented')
   end
 
-  def move_piece(from_row, from_col, to_row, to_col)
+  def move_piece(from_row, from_col, to_row, to_col, move_type)
     FanoronaLogger.log_error('Not Implemented')
   end
 
@@ -45,7 +45,7 @@ class Board
     FanoronaLogger.log_error('Not Implemented')
   end
 
-  def check_move_type(from_row, from_col, to_row, to_col)
+  def check_move_type(from_row, from_col, to_row, to_col, player)
     FanoronaLogger.log_error('Not Implemented')
   end
 end
