@@ -4,7 +4,31 @@ class Referee
   end
 
   def is_move_valid(from_row, from_col, to_row, to_col)
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+
+    from_row -= 1
+    from_col -= 1
+    to_row -= 1
+    to_col -= 1
+
+    is_diagonal = from_col != to_col && from_row != to_row
+
+    return false if is_diagonal && check_diagonals(from_row, from_col).empty?
+
+    # moving more than 1 slot
+    return false if (from_row - to_row).abs > 1 || (from_col - from_row).abs > 1
+
+    board = @board.display_board
+    moving_player = board[from_row][from_col]
+
+    # moving an empty slot
+    return false if moving_player == :E
+
+    target = board[to_row][to_col]
+
+    # moving to a non-empty slot
+    return false unless target == :E
+
     true
   end
 
