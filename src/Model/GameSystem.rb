@@ -49,6 +49,8 @@ class GameSystem
   def end_turn
     FanoronaLogger.log_info
     @turn_operator.switch_turns(@player1, @player2) if @ref.end_turn_validate(whose_turn)
+
+    @ref.check_game_over()
   end
 
   def revert_move

@@ -18,11 +18,27 @@ class Board
   end
 
   def setup_game_board
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+
+    @board = [[:B,:B,:B,:B,:B,:B,:B,:B,:B],
+              [:B,:B,:B,:B,:B,:B,:B,:B,:B],
+              [:B,:W,:B,:W,:E,:B,:W,:B,:W],
+              [:W,:W,:W,:W,:W,:W,:W,:W,:W],
+              [:W,:W,:W,:W,:W,:W,:W,:W,:W]]
   end
 
   def how_many_colour(colour)
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+
+    count = 0
+
+    @board.each do |row|
+      row.each do |space|
+        if space == colour
+          count += 1
+        end
+      end
+    end
   end
 
   def check_diagonals(row, col)
@@ -38,7 +54,12 @@ class Board
   end
 
   def check_empty_space(row, col)
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+
+    rowArray = @board.at(row)
+    space = rowArray.at(col)
+
+    space == :E
   end
 
   def revert_move

@@ -2,7 +2,7 @@ class Referee
   def initialize(board)
     @board = board
   end
-
+ 
   def is_move_valid(from_row, from_col, to_row, to_col)
     FanoronaLogger.log_error('Not Implemented')
     true
@@ -14,7 +14,18 @@ class Referee
   end
 
   def check_game_over
-    FanoronaLogger.log_error('Not Implemented')
+    FanoronaLogger.log_info
+
+    checkWhiteMoves = 0
+    checkBlackMoves = 0
+
+    if @board.how_many_colour(:W) == 0
+      return :B
+    elsif @board.how_many_colour(:B) == 0
+      return :W
+    end
+
+    return nil
   end
 
   def end_turn_validate(player)
